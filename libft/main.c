@@ -6,7 +6,7 @@
 /*   By: msapin <msapin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 16:10:52 by msapin            #+#    #+#             */
-/*   Updated: 2023/11/25 20:35:28 by msapin           ###   ########.fr       */
+/*   Updated: 2023/11/25 20:39:32 by msapin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -259,31 +259,26 @@ void	test_functions_three()
 	{
 		display_message("\n\nFT_STRCHR:", YELLOW);
 		char    s[] = "bonjour";
-		int c = '\0';
+		int c = 'j';
 
 		display_message("Libft", BLACK);
 		printf("%s\n", ft_strchr(s, c));
 
-		display_message("\nOriginal", BLACK);
+		display_message("Original", BLACK);
 		printf("%s\n", strchr(s, c));
-
-		// printf("STR before ft_tolower : %s\nSTR after ft_toupper : ", text);
-		// while (text[i] != '\0')
-		// {
-		//     printf("%c", ft_tolower(text[i]));
-		//     i++;
-		// }
-		// i = 0;
-		// printf("STR before tolower : %s\nSTR after tolower : ", text);
-		// while (text[i] != '\0')
-		// {
-		//     printf("%c", tolower(text[i]));
-		//     i++;
-		// }
-		// i = 0;
 	}
 
+	{
+		display_message("\n\nFT_STRRCHR:", YELLOW);
+		char    s[] = "bonjour";
+		int c = '\0';
 
+		display_message("Libft", BLACK);
+		printf("%s\n", ft_strrchr(s, c));
+
+		display_message("Original", BLACK);
+		printf("%s\n", strrchr(s, c));
+	}
 }
 
 int	getIndexTest(char * arg)
