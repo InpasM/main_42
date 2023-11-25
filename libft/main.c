@@ -6,22 +6,9 @@
 /*   By: msapin <msapin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 16:10:52 by msapin            #+#    #+#             */
-/*   Updated: 2023/11/25 18:06:17 by msapin           ###   ########.fr       */
+/*   Updated: 2023/11/25 20:35:28 by msapin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: msapin <msapin@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/16 12:36:17 by msapin            #+#    #+#             */
-/*   Updated: 2023/11/16 13:14:45 by msapin           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 
 #include "libft.h"
 #include <stdio.h>
@@ -60,7 +47,6 @@ void	display_message(char * message, char * color)
 void	test_functions_one()
 {
 	display_message("\nLIBFT - FUNCTIONS 1\n", GREEN);
-
 	{
 		display_message("FT_STRLEN:", YELLOW);
 		char    s[] = "abcdefghijklmnopqrstuvwxyz";
@@ -178,8 +164,125 @@ void	test_functions_one()
 	}
 }
 
+void	test_is_function(char * name_test, char * version, int (*f)(int))
+{
+	int i = 0;
+	int count_non = 0;
+	char    alphabet[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_-+=.,/;:'\"[{}]0123456789";
+
+	display_message(version, BLACK);
+	while (alphabet[i] != '\0') 
+	{
+		if (f(alphabet[i]) == '\0')
+		{
+			printf("%c, ", alphabet[i]);
+			count_non++;
+		}
+		i++;
+	}
+	printf("There are %d characters %s\n", count_non, name_test);
+}
+
 void	test_functions_two()
 {
+	display_message("\nLIBFT - FUNCTIONS 2\n", GREEN);
+
+	display_message("FT_ISALPHA:", YELLOW);
+	test_is_function("non alphabetic", "Libft", ft_isalpha);
+	test_is_function("non alphabetic", "Original", isalpha);
+
+	display_message("\nFT_ISDIGIT:", YELLOW);
+	test_is_function("non digital", "Libft", ft_isdigit);
+	test_is_function("non digital", "Original", isdigit);
+
+	display_message("\nFT_ISALNUM:", YELLOW);
+	test_is_function("non alphanumeric", "Libft", ft_isalnum);
+	test_is_function("non alphanumeric", "Original", isalnum);
+
+	display_message("\nFT_ISASCII:", YELLOW);
+	test_is_function("non ascii", "Libft", ft_isascii);
+	test_is_function("non ascii", "Original", isascii);
+
+	display_message("\nFT_ISPRINT:", YELLOW);
+	test_is_function("non printable", "Libft", ft_isprint);
+	test_is_function("non printable", "Original", isprint);
+}
+
+void	test_functions_three()
+{
+	display_message("\nLIBFT - FUNCTIONS 2\n", GREEN);
+
+	{
+		display_message("FT_TOUPPER:", YELLOW);
+		char    text[] = "abHDEJsjbdejqDUEJdeg";
+		int i = 0;
+
+		display_message("Libft", BLACK);
+		printf("STR before ft_toupper : %s\nSTR after ft_toupper : ", text);
+		while (text[i] != '\0')
+		{
+		    printf("%c", ft_toupper(text[i]));
+		    i++;
+		}
+		display_message("\nOriginal", BLACK);
+		i = 0;
+		printf("STR before toupper : %s\nSTR after toupper : ", text);
+		while (text[i] != '\0')
+		{
+		    printf("%c", toupper(text[i]));
+		    i++;
+		}
+	}
+
+	{
+		display_message("\n\nFT_TOLOWER:", YELLOW);
+		char    text[] = "abHDEJsjbdejqDUEJdeg";
+		int i = 0;
+
+		display_message("Libft", BLACK);
+		printf("STR before ft_tolower : %s\nSTR after ft_toupper : ", text);
+		while (text[i] != '\0')
+		{
+		    printf("%c", ft_tolower(text[i]));
+		    i++;
+		}
+		display_message("\nOriginal", BLACK);
+		i = 0;
+		printf("STR before tolower : %s\nSTR after tolower : ", text);
+		while (text[i] != '\0')
+		{
+		    printf("%c", tolower(text[i]));
+		    i++;
+		}
+	}
+
+	{
+		display_message("\n\nFT_STRCHR:", YELLOW);
+		char    s[] = "bonjour";
+		int c = '\0';
+
+		display_message("Libft", BLACK);
+		printf("%s\n", ft_strchr(s, c));
+
+		display_message("\nOriginal", BLACK);
+		printf("%s\n", strchr(s, c));
+
+		// printf("STR before ft_tolower : %s\nSTR after ft_toupper : ", text);
+		// while (text[i] != '\0')
+		// {
+		//     printf("%c", ft_tolower(text[i]));
+		//     i++;
+		// }
+		// i = 0;
+		// printf("STR before tolower : %s\nSTR after tolower : ", text);
+		// while (text[i] != '\0')
+		// {
+		//     printf("%c", tolower(text[i]));
+		//     i++;
+		// }
+		// i = 0;
+	}
+
 
 }
 
@@ -222,6 +325,9 @@ int main(int argc, char * argv[])
 				break;
 			case 2:
 				test_functions_two();
+				break;
+			case 3:
+				test_functions_three();
 				break;
 			default:
 				printf("%s%sError: %s%s: invalid index\n", RED, BOLD, RESET, argv[1]);
@@ -444,207 +550,6 @@ int main(int argc, char * argv[])
 	// printf("%s\n", strchr(s, c));
 	// printf("%s\n", ft_strchr(s, c));
 
-
-	// //////////////////////////////////////////////////////////// TESTS ft_tolower et tolower
-	// char    text[] = "abHDEJsjbdejqDUEJdeg";
-	// int i = 0;
-	// printf("Texte avant tolower : %s\nTexte apres tolower : ", text);
-	// while (text[i] != '\0')
-	// {
-	//     printf("%c", tolower(text[i]));
-	//     i++;
-	// }
-	// char    ft_text[] = "abHDEJsjbdejqDUEJdeg";
-	// i = 0;
-	// printf("\nTexte avant ft_tolower : %s\nTexte apres ft_tolower : ", text);
-	// while (text[i] != '\0')
-	// {
-	//     printf("%c", ft_tolower(text[i]));
-	//     i++;
-	// }
-
-
-	// //////////////////////////////////////////////////////////// TESTS ft_toupper et toupper
-	// char    text[] = "abHDEJsjbdejqDUEJdeg";
-	// int i = 0;
-	// printf("Texte avant toupper : %s\nTexte apres toupper : ", text);
-	// while (text[i] != '\0')
-	// {
-	//     printf("%c", toupper(text[i]));
-	//     i++;
-	// }
-	// char    ft_text[] = "abHDEJsjbdejqDUEJdeg";
-	// i = 0;
-	// printf("\nTexte avant ft_toupper : %s\nTexte apres ft_toupper : ", text);
-	// while (text[i] != '\0')
-	// {
-	//     printf("%c", ft_toupper(text[i]));
-	//     i++;
-	// }
-
-
-	// //////////////////////////////////////////////////////////// TESTS ft_isprint et isprint
-	// int i = 0;
-	// int count_non = 0;
-	// char    characters[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-+=.,/;:'\"[{}]æøå\b`~\0";
-	
-	// printf("Tests ft_isprint :\n");
-	// while (characters[i] != '\0') 
-	// {
-	//     if (ft_isprint(characters[i]) == '\0')
-	//     {
-	//         printf("%c, ", characters[i]);
-	//         count_non++;
-	//     }
-	//     i++;
-	// }
-	// printf("Ne sont pas des characters imprimable. Il y en a %d au total\n", count_non);
-	// printf("\nTests isprint :\n");
-	// i = 0;
-	// count_non = 0;
-	// while (characters[i] != '\0')
-	// {
-	//     if (isprint(characters[i]) == '\0')
-	//     {
-	//         printf("%c, ", characters[i]);
-	//         count_non++;
-	//     }
-	//     i++;
-	// }
-	// printf("Ne sont pas des characters imprimable. Il y en a %d au total\n", count_non);
-
-
-	// //////////////////////////////////////////////////////////// TESTS ft_isascii et isascii
-	// int i = 0;
-	// int count_non = 0;
-	// char    characters[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-+=.,/;:'\"[{}]æøå\b`~\0";
-	
-	// printf("Tests ft_isascii :\n");
-	// while (characters[i] != '\0') 
-	// {
-	//     if (ft_isascii(characters[i]) == '\0')
-	//     {
-	//         printf("%c, ", characters[i]);
-	//         count_non++;
-	//     }
-	//     i++;
-	// }
-	// printf("Ne sont pas des characters ascii. Il y en a %d au total\n", count_non);
-	// printf("\nTests isascii :\n");
-	// i = 0;
-	// count_non = 0;
-	// while (characters[i] != '\0')
-	// {
-	//     if (isascii(characters[i]) == '\0')
-	//     {
-	//         printf("%c, ", characters[i]);
-	//         count_non++;
-	//     }
-	//     i++;
-	// }
-	// printf("Ne sont pas des characters ascii. Il y en a %d au total\n", count_non);
-
-
-	// //////////////////////////////////////////////////////////// TESTS ft_isalnum et isalnum
-	// int i = 0;
-	// int count_non = 0;
-	// char    characters[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-+=.,/;:'\"[{}]";
-	
-
-	// //////////////////////////////////////////////////////////// loop ft_isalnum
-	// printf("Tests ft_isalnum :\n");
-	// while (characters[i] != '\0') 
-	// {
-	//     if (ft_isalnum(characters[i]) == '\0')
-	//     {
-	//         printf("%c, ", characters[i]);
-	//         count_non++;
-	//     }
-	//     i++;
-	// }
-	// printf("Ne sont pas des characters alphanumerique. Il y en a %d au total\n", count_non);
-	//  // loop isalnum
-	// printf("\nTests isalnum :\n");
-	// i = 0;
-	// count_non = 0;
-	// while (characters[i] != '\0')
-	// {
-	//     if (isalnum(characters[i]) == '\0')
-	//     {
-	//         printf("%c, ", characters[i]);
-	//         count_non++;
-	//     }
-	//     i++;
-	// }
-	// printf("Ne sont pas des characters alphanumerique. Il y en a %d au total\n", count_non);
-
-
-	// //////////////////////////////////////////////////////////// TESTS ft_isdigit et isdigit
-	// int i = 0;
-	// int count_non = 0;
-	// char    numbers[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-+=.,/;:'\"[{}]";
-	// //char    alphabet[] = "";
-	
-	// // loop ft_isdigit
-	// printf("Tests ft_isdigit :\n");
-	// while (numbers[i] != '\0') 
-	// {
-	//     if (ft_isdigit(numbers[i]) == '\0')
-	//     {
-	//         printf("%c n'est pas un chiffre\n", numbers[i]);
-	//         count_non++;
-	//     }
-	//     i++;
-	// }
-	// printf("Il y a %d characters non digitaux\n", count_non);
-	//  // loop isdigit
-	// printf("\nTests isdigit :\n");
-	// i = 0;
-	// count_non = 0;
-	// while (numbers[i] != '\0')
-	// {
-	//     if (isdigit(numbers[i]) == '\0')
-	//     {
-	//         printf("%c n'est pas un chiffre\n", numbers[i]);
-	//         count_non++;
-	//     }
-	//     i++;
-	// }
-	// printf("Il y a %d characters non digitaux\n", count_non);
-
-
-	// //////////////////////////////////////////////////////////// TESTS ft_isalpha et isalpha
-	// int i = 0;
-	// int count_non = 0;
-	// char    alphabet[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_-+=.,/;:'\"[{}]0123456789";
-	// //char    alphabet[] = "";
-	
-	// //////////////////////////////////////////////////////////// loop ft_isalpha
-	// printf("Tests ft_isalpha :\n");
-	// while (alphabet[i] != '\0') 
-	// {
-	//     if (ft_isalpha(alphabet[i]) == '\0')
-	//     {
-	//         printf("%c n'est pas une lettre\n", alphabet[i]);
-	//         count_non++;
-	//     }
-	//     i++;
-	// }
-	// printf("Il y a %d characters non alphabetique\n", count_non);
-	//  //////////////////////////////////////////////////////////// loop isalpha
-	// printf("\nTests isalpha :\n");
-	// i = 0;
-	// count_non = 0;
-	// while (alphabet[i] != '\0')
-	// {
-	//     if (isalpha(alphabet[i]) == '\0')
-	//     {
-	//         printf("%c n'est pas une lettre\n", alphabet[i]);
-	//         count_non++;
-	//     }
-	//     i++;
-	// }
-	// printf("Il y a %d characters non alphabetique\n", count_non);
 	
 	return 0;
 }
