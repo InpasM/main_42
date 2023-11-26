@@ -6,7 +6,7 @@
 /*   By: msapin <msapin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 16:10:52 by msapin            #+#    #+#             */
-/*   Updated: 2023/11/26 12:59:30 by msapin           ###   ########.fr       */
+/*   Updated: 2023/11/26 13:35:07 by msapin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,17 @@ char	ft_test_strmapi(unsigned int n, char c)
 {
 	(void)n;
 	(void)c;
-	return(c);
+	// ft_toupper(c);
+	printf("%c", ft_toupper(c));
+	return(ft_toupper(c));
 }
 
 void	ft_test_striteri(unsigned int n, char *c)
 {
 	(void)n;
+	(void)c;
 
-	*c = 'a';
+	// *c = 'a';
 	printf("%c|", *c);
 }
 
@@ -453,6 +456,69 @@ void	test_functions_five()
 	}
 }
 
+void	test_functions_six()
+{
+	display_message("\nLIBFT - FUNCTIONS 6\n", GREEN);
+	{
+		display_message("\nFT_STRMAPI:", YELLOW);
+		char	*s = "abcdefghijklmnopqrstuvwxyz";
+		
+		display_message("Libft", BLACK);
+		printf("Use strmapi with function ft_test_strmapi on :\n%s\n", s);
+		ft_strmapi(s, ft_test_strmapi);
+	}
+
+	{
+		display_message("\n\nFT_STRITERI:", YELLOW);
+		char	*s = "abcdefghijklmnopqrstuvwxyz";
+	
+		display_message("Libft", BLACK);
+		printf("STR before :\n%s\n", s);
+		printf("STR after :\n");
+		ft_striteri(s, ft_test_striteri);
+	}
+
+	{
+		display_message("\n\nFT_STRTRIM:", YELLOW);
+		char	*s1 = "lorem ipsum dolor sit amet";
+		char	*set = " lote";
+
+		display_message("Libft", BLACK);
+		printf("ft_strtrim:\n%s", ft_strtrim(s1, set));
+	}
+
+	{
+		display_message("\n\nFT_SPLIT:", YELLOW);
+		char	*s1 = "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse";
+		char	c = ' ';
+		char	**tab;
+		size_t	i = 0;
+		tab = ft_split(s1, c);
+		display_message("Libft", BLACK);
+		printf("STR before : %s\n", s1);
+		while (tab[i])
+		{
+			printf("%s\n", tab[i]);
+			i++;
+		}
+	}
+
+	{
+		display_message("\nFT_ITOA:", YELLOW);
+		display_message("Libft", BLACK);
+		printf("%d : %s\n", 0, ft_itoa(0));
+		printf("%d : %s\n", 9, ft_itoa(9));
+		printf("%d : %s\n", -9, ft_itoa(-9));
+		printf("%d : %s\n", 10, ft_itoa(10));
+		printf("%d : %s\n", -10, ft_itoa(-10));
+		printf("%d : %s\n", 8124, ft_itoa(8124));
+		printf("%d : %s\n", -9874, ft_itoa(-9874));
+		printf("%d : %s\n", 543000, ft_itoa(543000));
+		printf("%s : %s\n", "-2147483648LL", ft_itoa(-2147483648LL));
+		printf("%s : %s\n", "2147483647", ft_itoa(2147483647));
+	}
+}
+
 int	getIndexTest(char * arg)
 {
 	int	sizeArg = strlen(arg);
@@ -502,196 +568,13 @@ int main(int argc, char * argv[])
 			case 5:
 				test_functions_five();
 				break;
+			case 6:
+				test_functions_six();
+				break;
 			default:
 				printf("%s%sError: %s%s: invalid index\n", RED, BOLD, RESET, argv[1]);
 		}
 	}
 
-	// //////////////////////////////////////////////////////////// TESTS ft_striteri
-	// char	str_toupper[] = "avant ft_toupper";
-	
-	// printf("str_toupper avant :\n%s\n", str_toupper);
-	// ft_striteri(str_toupper, ft_test_striteri);
-	// printf("\nPuis apres :\n%s\n\n", str_toupper);
-
-
-	// // //////////////////////////////////////////////////////////// TESTS ft_strmapi
-	// char	*s = "avant ft_toupper";
-	// char	*s_after;
-	
-	// s_after = ft_strmapi(s, ft_test_strmapi);
-	// printf("s avant :\n%s\nPuis apres :\n%s", s, s_after);
-
-
-	// //////////////////////////////////////////////////////////// TESTS ft_itoa
-	// printf("|%s|\n", ft_itoa(0));
-	// printf("|%s|\n", ft_itoa(9));
-	// printf("|%s|\n", ft_itoa(-9));
-	// printf("|%s|\n", ft_itoa(10));
-	// printf("|%s|\n", ft_itoa(-10));
-	// printf("|%s|\n", ft_itoa(8124));
-	// printf("|%s|\n", ft_itoa(-9874));
-	// printf("|%s|\n", ft_itoa(543000));
-	// printf("|%s|\n", ft_itoa(-2147483648LL));
-	// printf("|%s|\n", ft_itoa(2147483647));
-
-
-	// //////////////////////////////////////////////////////////// TESTS ft_split
-	// //char	*s1 = "lorem ipsum dolor sit amet";
-	// char	*s1 = "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse";
-	// char	c = ' ';
-	// char	**tab;
-	// size_t	i = 0;
-	// tab = ft_split(s1, c);
-	// while (tab[i])
-	// {
-	// 	printf("%s\n", tab[i]);
-	// 	i++;
-	// }
-
-
-	// //////////////////////////////////////////////////////////////TESTS ft_strtrim
-	// //char	*s1 = "lorem ipsum dolor sit amet";
-	// char	*s1 = "lorem ipsum dolor sit amet";
-	// //char	*s1 = "          ";
-	// char	*set = " lote";
-	// printf("ft_strtrim:\n%s", ft_strtrim(s1, set));
-
-
-	// //////////////////////////////////////////////////////////// TESTS ft_strjoin
-	// char	*s1 = "Debut de phrase ";
-	// char	*s2 = "et fin de phrase";
-	// printf("%s", ft_strjoin(s1, s2));
-
-
-	// //////////////////////////////////////////////////////////// TESTS ft_putnbr_fd
-	// ft_putnbr_fd(-2147483648LL, 2);
-
-	// //////////////////////////////////////////////////////////// TESTS ft_putstr_fd
-	// ft_putendl_fd("Test de phrase avec retour a la ligne", 0);
-	
-	// //////////////////////////////////////////////////////////// TESTS ft_putstr_fd
-	// ft_putstr_fd("Test de phrase", 0);
-
-
-
-	// //////////////////////////////////////////////////////////// TESTS ft_strdup et strdup
-	// char	*strdup_str = "Phrase a copier";
-	// printf("ft_strdup :\n%s", ft_strdup(strdup_str));
-
-
-	// //////////////////////////////////////////////////////////// TESTS ft_atoi et atoi
-	// char    atoi_str[60] = "     \n\t\v\f\r    -01234567890.7151a";
-	// printf("String avant atoi : %s\n", atoi_str);
-	// printf("String apres atoi : %d\n", atoi(atoi_str));
-
-	// printf("String avant ft_atoi : %s\n", atoi_str);
-	// printf("String apres ft_atoi : %d\n", ft_atoi(atoi_str));
-
-
-	// //////////////////////////////////////////////////////////// TESTS ft_strnstr et strnstr
-	// char    *strnstr_haystack = "Phrase dans laquelle chercher";
-	// char    *strnstr_needle = "laqu";
-	// size_t strnstr_len = 20;
-	// printf("%s\n", strnstr(strnstr_haystack, strnstr_needle, strnstr_len));
-	// printf("%s\n", ft_strnstr(strnstr_haystack, strnstr_needle, strnstr_len));
-
-
-	// //////////////////////////////////////////////////////////// TESTS ft_strncmp et strncmp
-	// char    *strncmp_s1 = "ab\ncdefg";
-	// char    *strncmp_s2 = "abcdefgh";
-	// char    *strncmp_s1 = "test\200";
-	// char    *strncmp_s2 = "test\0";
-
-	// size_t  n = 6;
-
-	// printf("strncmp :\n%s vs %s = %d\n", strncmp_s1, strncmp_s2, strncmp(strncmp_s1, strncmp_s2, n));
-	// printf("ft_strncmp :\n%s vs %s = %d\n", strncmp_s1, strncmp_s2, ft_strncmp(strncmp_s1, strncmp_s2, n));
-	
-
-	// //////////////////////////////////////////////////////////// TESTS ft_strlcat et strlcat
-	// char    dst[100] = "Debut de ";
-	// //char    src[] = "phrase fin de phrase";
-	
-	// //char    dst[11] = "a";
-	// char    src[] = "lorem";
-
-	// size_t dstsize = 15;
-	// printf("Avant strlcat\ndst = %s, src = %s, dstsize = %zu\n", dst, src, dstsize);
-	// size_t return_value = strlcat(dst, src, dstsize);
-	// printf("Apres strlcat\ndst = %s, src = %s, dstsize = %zu, return value = %lu\n\n", dst, src, dstsize, return_value);
-
-	// char    ft_dst[11] = "a";
-	// printf("Avant ft_strlcat\ndst = %s, src = %s, dstsize = %zu\n", ft_dst, src, dstsize);
-	// size_t return_value = ft_strlcat(ft_dst, src, dstsize);
-	// printf("Apres ft_strlcat\ndst = %s, src = %s, dstsize = %zu, return value = %lu\n", ft_dst, src, dstsize, return_value);
-
-	// char	dest[11] = "a";
-	// printf("%zu", ft_strlcat(dest, "lorem", 15));
-	// write(1, "\n", 1);
-	// write(1, dest, 15);
-
-
-	// //////////////////////////////////////////////////////////// TESTS ft_strlcpy et strlcpy
-	// char    dst[100] = "Destination";
-	// char    src[] = "Remplacement";
-	// size_t dstsize = 10;
-	// printf("Avant strlcpy\ndst = %s, src = %s, dstsize = %zu\n", dst, src, dstsize);
-	// strlcpy(dst, src, dstsize);
-	// printf("Apres strlcpy\ndst = %s, src = %s, dstsize = %zu, return value = %lu\n\n", dst, src, dstsize, strlcpy(dst, src, dstsize));
-
-	// char    ft_dst[100] = "Destination";
-	// printf("Avant ft_strlcpy\ndst = %s, src = %s, dstsize = %zu\n", ft_dst, src, dstsize);
-	// ft_strlcpy(ft_dst, src, dstsize);
-	// printf("Apres ft_strlcpy\ndst = %s, src = %s, dstsize = %zu, return value = %lu\n", ft_dst, src, dstsize, ft_strlcpy(ft_dst, src, dstsize));
-	
-
-
-	// //////////////////////////////////////////////////////////// TESTS ft_memmove
-	// char	src[] = "lorem ipsum dolor sit amet";
-	// char	ft_src[] = "lorem ipsum dolor sit amet";
-	// char	*dest;
-	// char	*ft_dest;
-	// int		arg;
-	// dest = src + 1;
-	// ft_dest = ft_src + 1;
-	// printf("memmove:\n");
-	// if (dest != memmove(dest, src, 8))
-	// 	write(1, "dest's adress was not returned\n", 31);
-	// write(1, dest, 22);
-
-	// printf("\n\nft_memmove:\n");
-	// if (ft_dest != ft_memmove(ft_dest, ft_src, 8))
-	// 	write(1, "dest's adress was not returned\n", 31);
-	// //printf("\n");
-	// write(1, ft_dest, 22);
-	
-	// printf("memmove:\n");
-	// if (dest != memmove(dest, "con\0sec\0\0te\0tur", 10))
-	// 	write(1, "dest's adress was not returned\n", 31);
-	// write(1, dest, 22);
-
-	// printf("\n\nft_memmove:\n");
-	// if (ft_dest != ft_memmove(ft_dest, "con\0sec\0\0te\0tur", 10))
-	// 	write(1, "dest's adress was not returned\n", 31);
-	// write(1, ft_dest, 22);
-
-
-
-	// //////////////////////////////////////////////////////////// TESTS ft_strrchr et strrchr
-	// char    s[] = "bonjour phrase dans laquelle chercher";
-	// int c = 'b';
-	// printf("%s\n", strrchr(s, c));
-	// printf("%s\n", ft_strrchr(s, c));
-
-
-	// //////////////////////////////////////////////////////////// TESTS ft_strchr et strchr
-	// //char    s[] = "Phrase dans laquelle chercher";
-	// char    s[] = "bonjour";
-	// int c = '\0';
-	// printf("%s\n", strchr(s, c));
-	// printf("%s\n", ft_strchr(s, c));
-
-	
 	return 0;
 }
