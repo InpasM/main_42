@@ -6,7 +6,7 @@
 /*   By: msapin <msapin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 16:10:52 by msapin            #+#    #+#             */
-/*   Updated: 2023/11/26 11:59:02 by msapin           ###   ########.fr       */
+/*   Updated: 2023/11/26 12:59:30 by msapin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -398,6 +398,61 @@ void	test_functions_four()
 	}
 }
 
+void	test_functions_five()
+{
+	display_message("\nLIBFT - FUNCTIONS 5\n", GREEN);
+	{
+		display_message("FT_SUBSTR:", YELLOW);
+		char	str[] = "lorem ipsum dolor sit amet";
+		char	*strsub;
+
+		display_message("Libft", BLACK);
+		strsub = ft_substr(str, 12, 9);
+		printf("%s\n", strsub);
+		free(strsub);
+	}
+
+	{
+		display_message("\nFT_STRJOIN:", YELLOW);
+		char	str_begin[] = "lorem ipsum ";
+		char	str_end[] = "dolor sit amet";
+		char	*new_str;
+
+		display_message("Libft", BLACK);
+		new_str = ft_strjoin(str_begin, str_end);
+		printf("%s+ %s = %s\n", str_begin, str_end, new_str);
+		free(new_str);
+	}
+
+	{
+		display_message("\nFT_PUTCHAR_FD:", YELLOW);
+
+		display_message("Libft", BLACK);
+		ft_putchar_fd('c', 0);
+	}
+
+	{
+		display_message("\n\nFT_PUTSTR_FD:", YELLOW);
+
+		display_message("Libft", BLACK);
+		ft_putstr_fd("lorem ipsum dolor sit amet", 0);
+	}
+
+	{
+		display_message("\n\nFT_PUTENDL_FD:", YELLOW);
+
+		display_message("Libft", BLACK);
+		ft_putendl_fd("lorem ipsum dolor sit amet", 0);
+	}
+
+	{
+		display_message("\nFT_PUTNBR_FD:", YELLOW);
+
+		display_message("Libft", BLACK);
+		ft_putnbr_fd(-2147483648LL, 2);
+	}
+}
+
 int	getIndexTest(char * arg)
 {
 	int	sizeArg = strlen(arg);
@@ -443,6 +498,9 @@ int main(int argc, char * argv[])
 				break;
 			case 4:
 				test_functions_four();
+				break;
+			case 5:
+				test_functions_five();
 				break;
 			default:
 				printf("%s%sError: %s%s: invalid index\n", RED, BOLD, RESET, argv[1]);
@@ -506,28 +564,6 @@ int main(int argc, char * argv[])
 	// printf("%s", ft_strjoin(s1, s2));
 
 
-	// //////////////////////////////////////////////////////////////TESTS ft_substr
-	// char	str[] = "lorem ipsum dolor sit amet";
-	// char	*strsub;
-	// int		arg;
-
-	// char *bullshit;
-	// if (!(strsub = ft_substr(str, 400, 20)))
-	// 	printf("NULL");
-	// else
-	// {
-	// 	bullshit = (char *)&strsub[30];
-	// 	bullshit = "FULL BULLSHIT";
-	// 	if (strsub)
-	// 		printf("%s", strsub);
-	// 	else
-	// 		printf("rip");
-	// }
-	// if (str == strsub)
-	// 	printf("\nA new string was not returned");
-	// (void)bullshit;
-
-
 	// //////////////////////////////////////////////////////////// TESTS ft_putnbr_fd
 	// ft_putnbr_fd(-2147483648LL, 2);
 
@@ -537,8 +573,6 @@ int main(int argc, char * argv[])
 	// //////////////////////////////////////////////////////////// TESTS ft_putstr_fd
 	// ft_putstr_fd("Test de phrase", 0);
 
-	// //////////////////////////////////////////////////////////// TESTS ft_putchar_fd
-	// ft_putchar_fd('c', 0);
 
 
 	// //////////////////////////////////////////////////////////// TESTS ft_strdup et strdup
