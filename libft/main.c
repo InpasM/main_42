@@ -6,7 +6,7 @@
 /*   By: msapin <msapin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 16:10:52 by msapin            #+#    #+#             */
-/*   Updated: 2023/11/26 10:18:57 by msapin           ###   ########.fr       */
+/*   Updated: 2023/11/26 11:59:02 by msapin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
+#include <malloc.h>
 
 # define BLACK "\033[0;30m"
 # define WHITE "\033[0;37m"
@@ -287,6 +288,116 @@ void	test_functions_three()
 	}
 }
 
+void	test_functions_four()
+{
+	display_message("\nLIBFT - FUNCTIONS 4\n", GREEN);
+	{
+		display_message("FT_STRLCAT:", YELLOW);
+		char    ft_dst[100] = "lorem ipsum ";
+		char    src[] = "dolor sit amet";
+		size_t return_value;
+		size_t dstsize = 22;
+
+		display_message("Libft", BLACK);
+		printf("DST before : %s\n", ft_dst);
+		return_value = ft_strlcat(ft_dst, src, dstsize);
+		printf("DST after : %s / return value : %lu / dstsize : %lu\n", ft_dst, return_value, dstsize);
+
+		// display_message("Original", BLACK);
+		// char    dst[100] = "lorem ipsum ";
+		// printf("DST before : %s\n", dst);
+		// strncat(dst, src, dstsize);
+		// return_value = strlen(dst);
+		// printf("DST after : %s / return value : %lu / dstsize : %lu\n", dst, return_value, dstsize);
+	}
+
+	{
+		display_message("\nFT_STRLCPY:", YELLOW);
+		char    ft_dst[100] = "Destination";
+		char    src[] = "Replacement";
+		size_t dstsize = 12;
+		size_t return_value;
+
+		display_message("Libft", BLACK);
+		printf("DST before : %s\n", ft_dst);
+		return_value = ft_strlcpy(ft_dst, src, dstsize);
+		printf("DST after : %s / return value = %lu\n", ft_dst, return_value);
+	
+		// display_message("Original", BLACK);
+		// char    dst[100] = "Destination";
+		// printf("DST before : %s\n", dst);
+		// strncpy(dst, src, dstsize);
+		// printf("DST after : %s\n", dst);
+	}
+
+	{
+		display_message("\nFT_ATOI:", YELLOW);
+		char    atoi_str[60] = "     \n\t\v\f\r    -01234567890.7151a";
+
+		display_message("Libft", BLACK);
+		printf("STR before : %s\n", atoi_str);
+		printf("STR after : %d\n", ft_atoi(atoi_str));
+
+		display_message("Original", BLACK);
+		printf("STR before : %s\n", atoi_str);
+		printf("STR after : %d\n", atoi(atoi_str));
+	}
+
+	{
+		display_message("\nFT_STRNSTR:", YELLOW);
+		char    *strnstr_haystack = "lorem ipsum dolor sit amet";
+		char    *strnstr_needle = "sit ";
+		size_t strnstr_len = 26;
+
+		display_message("Libft", BLACK);
+		printf("%s\n", ft_strnstr(strnstr_haystack, strnstr_needle, strnstr_len));
+	}
+
+	{
+		display_message("\nFT_STRNCMP:", YELLOW);
+		char    *one_str_s1 = "ab\ncdefg";
+		char    *one_str_s2 = "abcdefgh";
+		char    *two_str_s1 = "test\200";
+		char    *two_str_s2 = "test\0";
+		size_t  n = 6;
+
+		display_message("Libft", BLACK);
+		printf("TEST 1 :\n%s vs %s = %d\n", one_str_s1, one_str_s2, ft_strncmp(one_str_s1, one_str_s2, n));
+		printf("TEST 2 :\n%s vs %s = %d\n", two_str_s1, two_str_s2, ft_strncmp(two_str_s1, two_str_s2, n));
+	
+		display_message("Original", BLACK);
+		printf("TEST 1 :\n%s vs %s = %d\n", one_str_s1, one_str_s2, strncmp(one_str_s1, one_str_s2, n));
+		printf("TEST 2 :\n%s vs %s = %d\n", two_str_s1, two_str_s2, strncmp(two_str_s1, two_str_s2, n));
+	}
+
+	{
+		display_message("\nFT_CALLOC:", YELLOW);
+		int calloc_count = 30;
+		int calloc_size = 1;
+
+		display_message("Libft", BLACK);
+		printf("number bit allocated :%ld\n", malloc_usable_size(ft_calloc(calloc_count, calloc_size)));
+
+		display_message("Original", BLACK);
+		printf("number bit allocated :%ld\n\n", malloc_usable_size(calloc(calloc_count, calloc_size)));
+	}
+
+	{
+		display_message("\nFT_STRDUP:", YELLOW);
+		char	*str = "lorem ipsum dolor sit amet";
+
+		display_message("Libft", BLACK);
+		char *ft_str = ft_strdup(str);
+		printf("ft_strdup :\n%s\n", ft_str);
+		free(ft_str);
+
+		display_message("Original", BLACK);
+		char *or_str = ft_strdup(str);
+		printf("strdup :\n%s\n", or_str);
+		free(or_str);
+	}
+}
+
 int	getIndexTest(char * arg)
 {
 	int	sizeArg = strlen(arg);
@@ -329,6 +440,9 @@ int main(int argc, char * argv[])
 				break;
 			case 3:
 				test_functions_three();
+				break;
+			case 4:
+				test_functions_four();
 				break;
 			default:
 				printf("%s%sError: %s%s: invalid index\n", RED, BOLD, RESET, argv[1]);
@@ -430,13 +544,6 @@ int main(int argc, char * argv[])
 	// //////////////////////////////////////////////////////////// TESTS ft_strdup et strdup
 	// char	*strdup_str = "Phrase a copier";
 	// printf("ft_strdup :\n%s", ft_strdup(strdup_str));
-
-
-	// //////////////////////////////////////////////////////////// TESTS ft_calloc et calloc
-	// int calloc_count = 30;
-	// int calloc_size = 1;
-	// printf("calloc :\n%d\n\n", (int)calloc(calloc_count, calloc_size));
-	// printf("ft_calloc :\n%d", (int)ft_calloc(calloc_count, calloc_size));
 
 
 	// //////////////////////////////////////////////////////////// TESTS ft_atoi et atoi
