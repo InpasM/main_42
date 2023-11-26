@@ -6,7 +6,7 @@
 /*   By: msapin <msapin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 16:10:52 by msapin            #+#    #+#             */
-/*   Updated: 2023/11/25 20:39:32 by msapin           ###   ########.fr       */
+/*   Updated: 2023/11/26 10:18:57 by msapin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,26 +258,32 @@ void	test_functions_three()
 
 	{
 		display_message("\n\nFT_STRCHR:", YELLOW);
-		char    s[] = "bonjour";
-		int c = 'j';
+		char    str[] = "lorem ipsum dolor sit amet";
+		char	*charToFound = "orzdt\0m";
+		int i;
 
 		display_message("Libft", BLACK);
-		printf("%s\n", ft_strchr(s, c));
+		for (i = 0; i < 7; i++)
+			printf("%c: %s\n", charToFound[i], ft_strchr(str, charToFound[i]));
 
 		display_message("Original", BLACK);
-		printf("%s\n", strchr(s, c));
+		for (i = 0; i < 7; i++)
+			printf("%c: %s\n", charToFound[i], strchr(str, charToFound[i]));
 	}
 
 	{
 		display_message("\n\nFT_STRRCHR:", YELLOW);
-		char    s[] = "bonjour";
-		int c = '\0';
+		char    str[] = "lorem ipsum dolor sit amet";
+		char	*charToFound = "orzdt\0m";
+		int i;
 
 		display_message("Libft", BLACK);
-		printf("%s\n", ft_strrchr(s, c));
+		for (i = 0; i < 7; i++)
+			printf("%c: %s\n", charToFound[i], ft_strrchr(str, charToFound[i]));
 
 		display_message("Original", BLACK);
-		printf("%s\n", strrchr(s, c));
+		for (i = 0; i < 7; i++)
+			printf("%c: %s\n", charToFound[i], strrchr(str, charToFound[i]));
 	}
 }
 
